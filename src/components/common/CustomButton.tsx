@@ -1,18 +1,18 @@
-import React, { ReactNode } from 'react'
-import { Button } from '../ui/button'
-import clsx from 'clsx'
+import React, { ReactNode } from "react";
+import { Button } from "../ui/button";
+import clsx from "clsx";
 
 interface CustomButtonProps {
-  type?: 'default' | 'transparent'
-  onClick?: () => void
-  rightIcon?: ReactNode
-  leftIcon?: ReactNode
-  children: ReactNode
-  className?: string
+  type?: "default" | "transparent";
+  onClick?: () => void;
+  rightIcon?: ReactNode;
+  leftIcon?: ReactNode;
+  children: ReactNode;
+  className?: string;
 }
 
 const CustomButton: React.FC<CustomButtonProps> = ({
-  type = 'default',
+  type = "default",
   onClick,
   rightIcon,
   leftIcon,
@@ -20,12 +20,13 @@ const CustomButton: React.FC<CustomButtonProps> = ({
   className,
 }) => {
   const buttonClasses = clsx(
-    'flex items-center justify-center',
+    "flex items-center justify-center",
     {
-      'bg-transparent border border-primary text-primary hover:bg-primary/10': type === 'transparent',
+      "bg-transparent border border-primary text-primary hover:bg-primary/10":
+        type === "transparent",
     },
-    className
-  )
+    className,
+  );
 
   return (
     <Button onClick={onClick} className={buttonClasses}>
@@ -33,7 +34,7 @@ const CustomButton: React.FC<CustomButtonProps> = ({
       {children}
       {rightIcon && <span className="ml-2">{rightIcon}</span>}
     </Button>
-  )
-}
+  );
+};
 
-export default CustomButton
+export default CustomButton;

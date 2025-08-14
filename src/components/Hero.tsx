@@ -1,63 +1,69 @@
-"use client";
-
-import type { FC } from "react";
+"use client"
+import React, { useEffect, useState } from "react";
 import { ChevronRight } from "lucide-react";
 import CustomButton from "./common/CustomButton";
 import CustomCard from "./common/CustomCard";
-import { useEffect, useState } from "react";
 import { fetchRepoInfo } from "@/lib/github";
 
+// Import static/config values from src/constants.ts (parent directory)
+import { CORE_PROJECT_COUNT, FALLBACK_STATS, STAT_LABELS } from "../constants";
+
+// Typescript interface for displaying each stat item
 interface StatItem {
   value: string;
   label: string;
   valueColor: string;
 }
 
-const Hero: FC = () => {
-  const [stars, setStars] = useState<string>("...");
-  const [forks, setForks] = useState<string>("...");
+const Hero: React.FC = () => {
+  // Use fallback values from constants initially
+  const [stars, setStars] = useState<string>(FALLBACK_STATS.stars);
+  const [forks, setForks] = useState<string>(FALLBACK_STATS.forks);
 
+  // Fetch GitHub stats when component mounts
   useEffect(() => {
     const fetchData = async () => {
       try {
+        // Attempt to fetch repo info, update states if success
         const data = await fetchRepoInfo();
         setStars(data.stargazers_count?.toString() ?? "0");
         setForks(data.forks_count?.toString() ?? "0");
       } catch {
+        // If fetch fails, show N/A
         setStars("N/A");
         setForks("N/A");
       }
     };
-
     fetchData();
   }, []);
 
+  // Prepare stats for cards using config constants
   const stats: StatItem[] = [
     {
       value: stars,
-      label: "GitHub Stars",
-      valueColor: "text-purple-600 dark:text-purple-400",
+      label: STAT_LABELS[0].label,
+      valueColor: STAT_LABELS[0].valueColor,
     },
     {
       value: forks,
-      label: "GitHub Forks",
-      valueColor: "text-blue-600 dark:text-blue-400",
+      label: STAT_LABELS[1].label,
+      valueColor: STAT_LABELS[1].valueColor,
     },
     {
-      value: "3",
-      label: "Core Projects",
-      valueColor: "text-cyan-600 dark:text-cyan-400",
+      value: CORE_PROJECT_COUNT.toString(),
+      label: STAT_LABELS[2].label,
+      valueColor: STAT_LABELS[2].valueColor,
     },
   ];
 
-  // "n/a" (case-insensitive) value filter
+  // Filter out stat cards with "N/A" value
   const filteredStats = stats.filter(
-    (stat) => stat.value && stat.value.toLowerCase() !== "n/a"
+    (stat) => stat.value && stat.value.toLowerCase() !== "n/a",
   );
 
   return (
     <section className="relative py-20 px-6 dark:bg-[#101828]">
-      {/* Blue gradient blob in the lower left corner, only in dark mode */}
+      {/* Blue gradient blob - only in dark mode */}
       <div className="hidden dark:block absolute -bottom-32 -left-32 w-64 h-64 bg-gradient-to-br from-blue-400/40 via-blue-500/30 to-transparent rounded-full blur-3xl pointer-events-none z-0" />
       <div className="max-w-7xl mx-auto text-center relative z-10">
         <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
@@ -76,6 +82,7 @@ const Hero: FC = () => {
           seamless blockchain integration.
         </p>
 
+        {/* Action buttons */}
         <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
           <CustomButton
             type="default"
@@ -94,8 +101,10 @@ const Hero: FC = () => {
           </CustomButton>
         </div>
 
+        {/* Stat cards grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
           {filteredStats.map((stat, index) => {
+            // Animation classes for card entry
             const animations = [
               "animate-fadeInUp",
               "animate-scaleIn",
