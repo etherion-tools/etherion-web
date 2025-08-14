@@ -50,6 +50,11 @@ const Hero: FC = () => {
     },
   ];
 
+  // "n/a" (case-insensitive) value filter
+  const filteredStats = stats.filter(
+    (stat) => stat.value && stat.value.toLowerCase() !== "n/a"
+  );
+
   return (
     <section className="relative py-20 px-6 dark:bg-[#101828]">
       {/* Blue gradient blob in the lower left corner, only in dark mode */}
@@ -90,8 +95,7 @@ const Hero: FC = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
-          {stats.map((stat, index) => {
-            // animations for tiles
+          {filteredStats.map((stat, index) => {
             const animations = [
               "animate-fadeInUp",
               "animate-scaleIn",
