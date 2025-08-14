@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import { ModeToggle } from "@/components/ui/theme-toggle";
 import { Menu, X } from "lucide-react";
@@ -8,18 +8,8 @@ import { Button } from "@/components/ui/button";
 import { Logo } from "./Logo";
 
 export function NavigationBar() {
-
-  // eslint-disable-next-line 
-  const [isScrolled, setIsScrolled] = useState(false);
+  // only for mobile menu toggle
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 10);
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
 
   const navLinks = [
     { name: "About", href: "#" },
@@ -29,10 +19,8 @@ export function NavigationBar() {
   ];
 
   return (
-    <nav
-      className={`backdrop-blur-lg bg-white/10 dark:bg-gray-800/10 transition-all duration-300 font-inter`}
-    >
-      <div className="max-w-7xl mx-auto px-8">
+    <nav className="fixed top-0 left-0 w-full z-50 backdrop-blur-lg bg-white/10 dark:bg-gray-800/10 transition-all duration-300 font-inter">
+      <div className="max-w-7xl mx-auto px-4 sm:px-8">
         <div className="flex items-center justify-between py-6">
           {/* Logo */}
           <Logo />
@@ -53,7 +41,7 @@ export function NavigationBar() {
             ))}
           </div>
 
-          {/* Theme toggle centered between nav and button */}
+          {/* Theme toggle */}
           <div className="hidden md:flex items-center justify-center px-8">
             <ModeToggle />
           </div>
