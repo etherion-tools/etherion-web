@@ -24,7 +24,6 @@ export function NavigationBar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-8">
         {/* Navbar main row layout */}
         <div className="flex items-center justify-between py-6">
-          
           {/* Logo plus brand name (gradient text) */}
           <div className="flex items-center gap-2 select-none">
             {/* Logo PNG from public folder */}
@@ -41,10 +40,10 @@ export function NavigationBar() {
               Etherion Tools
             </span>
           </div>
-          
+
           {/* Spacer between logo and nav links */}
           <div className="flex-grow"></div>
-          
+
           {/* Desktop navigation links */}
           <div className="hidden md:flex items-center justify-end">
             {navLinks.map((link) => (
@@ -57,19 +56,19 @@ export function NavigationBar() {
               </Link>
             ))}
           </div>
-          
+
           {/* Desktop theme toggle */}
           <div className="hidden md:flex items-center justify-center px-8">
             <ModeToggle />
           </div>
-          
+
           {/* Desktop right action button */}
           <div className="hidden md:flex items-center">
             <Button className="h-10 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-6 py-2 text-sm rounded-xl transition-all duration-300 hover:scale-105">
               Explore Tools
             </Button>
           </div>
-          
+
           {/* Mobile menu & theme toggle (only visible on small screens) */}
           <div className="flex items-center md:hidden">
             <ModeToggle />

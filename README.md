@@ -60,13 +60,13 @@ landing/
 
 ## 📝 Available Scripts
 
-| Command | Description |
-|---------|-------------|
-| `npm run dev` | Start development server with hot-reload |
-| `npm run build` | Build the application for production |
-| `npm run start` | Start the production server |
-| `npm run lint` | Run ESLint to check code quality |
-| `npm run type-check` | Run TypeScript type checking |
+| Command              | Description                              |
+| -------------------- | ---------------------------------------- |
+| `npm run dev`        | Start development server with hot-reload |
+| `npm run build`      | Build the application for production     |
+| `npm run start`      | Start the production server              |
+| `npm run lint`       | Run ESLint to check code quality         |
+| `npm run type-check` | Run TypeScript type checking             |
 
 ### Development with Turbopack
 
